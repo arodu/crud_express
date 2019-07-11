@@ -26,7 +26,6 @@ const indexRoutes = require('./routes/index')
 // routes
   app.use('/', indexRoutes)
 
-
 // server start
   app.listen(app.get('port'), () =>{
     console.log('Server started on port '+app.get('port'))
