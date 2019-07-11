@@ -1,7 +1,14 @@
 const path = require('path')
 const express = require('express')
 const morgan = require('morgan')
+const mongoose = require('mongoose')
+
+
 const app = express()
+
+mongoose.connect('mongodb://localhost/crud-mongo', { useNewUrlParser: true })
+  .then(db => console.log('mongodb connected'))
+  .catch(err => console.error(err))
 
 const indexRoutes = require('./routes/index')
 
