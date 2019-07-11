@@ -1,0 +1,60 @@
+<% include partials/_header %>
+
+  <div class="container">
+      <div class="row">
+        <div class="col-md-5 mb-3">
+          <div class="card">
+            <div class="card-body">
+              <form action="/add" method="post">
+                <div class="form-group">
+                  <input type="text" name="title" value="" class="form-control" placeholder="Title">
+                </div>
+                <div class="form-group">
+                  <textarea name="description" class="form-control" placeholder="Description"></textarea>
+                </div>
+                <input type="submit" value="Add" class="btn btn-dark btn-block">
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-7">
+          <table class="table table-bordered table-hover">
+            <thead>
+              <tr>
+                <th>Task</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% if(tasks.length > 0){ %>
+                <% for(var i=0; i < tasks.length; i++){ %>
+                <tr>
+                  <td>
+                    <strong><%= tasks[i].title %></strong><br/>
+                    <%= tasks[i].description %>
+                  </td>
+                  <td>
+                    <a href="/turn/<%= tasks[i]._id%>" class="btn btn-sm <%= (tasks[i].status ? 'btn-success' : 'btn-dark') %>">Done</a>
+                    <a href="/edit/<%= tasks[i]._id%>" class="btn btn-sm btn-info">Edit</a>
+                    <a href="/delete/<%= tasks[i]._id%>" class="btn btn-sm btn-danger" onclick="if(!confirm('Do you want to delete this task?')){ return false }">Delete</a>
+                  </td>
+                </tr>
+                <% } %>
+              <% }else{ %>
+                <tr>
+                  <td colspan="2">
+                    <div class="text-info">
+                      Tasks not found!
+                    </div>
+                  </td>
+                </tr>
+              <% } %>
+            </tbody>
+          </table>
+
+
+        </div>
+      </div>
+  </div>
+
+<% include partials/_footer %>
